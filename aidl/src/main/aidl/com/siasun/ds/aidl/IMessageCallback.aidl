@@ -1,7 +1,7 @@
 // IMessageCallback.aidl
 package com.siasun.ds.aidl;
 
-import com.example.messenger.Message;
+import com.siasun.ds.aidl.Message;
 
 interface IMessageCallback {
     /**

@@ -1,8 +1,8 @@
 // IMessageService.aidl
 package com.siasun.ds.aidl;
 
-import com.example.messenger.Message;
-import com.example.messenger.IMessageCallback;
+import com.siasun.ds.aidl.Message;
+import com.siasun.ds.aidl.IMessageCallback;
 
 interface IMessageService {
     /**
