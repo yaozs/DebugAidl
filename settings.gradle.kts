@@ -26,5 +26,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "DebugAidl"
-include(":app")
+//include(":app")
 include(":aidl")
+//include(":interaction")

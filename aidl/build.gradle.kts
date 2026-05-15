@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    id("maven-publish")
+//    id("maven-publish")
 }
 
 android {
@@ -27,31 +27,31 @@ android {
     }
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                groupId = "com.github.yaozs"
-                artifactId = "DebugAidl"
-                version = "0.5.0"
-
-                // 直接指定 AAR 文件，替代 from(components["release"])
-                artifact(tasks.named("bundleReleaseAar").map { it.outputs.files.single() })
-
-                // 可选：同时发布 sources.jar
-                artifact(tasks.named("sourcesJar").map { it.outputs.files.single() }) {
-                    classifier = "sources"
-                }
-            }
-        }
-    }
-}
-
-// 如果希望包含源码，需要单独定义 sourcesJar 任务
-tasks.register<Jar>("sourcesJar") {
-    from(android.sourceSets["main"].java.srcDirs)
-    archiveClassifier.set("sources")
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                groupId = "com.github.yaozs"
+//                artifactId = "DebugAidl"
+//                version = "0.5.0"
+//
+//                // 直接指定 AAR 文件，替代 from(components["release"])
+//                artifact(tasks.named("bundleReleaseAar").map { it.outputs.files.single() })
+//
+//                // 可选：同时发布 sources.jar
+//                artifact(tasks.named("sourcesJar").map { it.outputs.files.single() }) {
+//                    classifier = "sources"
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//// 如果希望包含源码，需要单独定义 sourcesJar 任务
+//tasks.register<Jar>("sourcesJar") {
+//    from(android.sourceSets["main"].java.srcDirs)
+//    archiveClassifier.set("sources")
+//}
 
 
 dependencies {
