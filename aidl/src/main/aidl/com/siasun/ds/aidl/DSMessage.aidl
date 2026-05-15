@@ -1,6 +1,6 @@
-// Message.aidl
+// DSMessage.aidl
 package com.siasun.ds.aidl;
 
 // Declare any non-default types here with import statements
 
-parcelable Message;
+parcelable DSMessage;

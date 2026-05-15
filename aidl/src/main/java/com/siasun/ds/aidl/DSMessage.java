@@ -3,35 +3,35 @@ package com.siasun.ds.aidl;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Message implements Parcelable {
+public class DSMessage implements Parcelable {
     private String info;      // 消息信息（如类型）
     private String content;   // 消息内容
     private String extJson;   // 扩展 JSON
 
-    public Message() {
+    public DSMessage() {
     }
 
-    public Message(String info, String content, String extJson) {
+    public DSMessage(String info, String content, String extJson) {
         this.info = info;
         this.content = content;
         this.extJson = extJson;
     }
 
-    protected Message(Parcel in) {
+    protected DSMessage(Parcel in) {
         info = in.readString();
         content = in.readString();
         extJson = in.readString();
     }
 
-    public static final Creator<Message> CREATOR = new Creator<Message>() {
+    public static final Creator<DSMessage> CREATOR = new Creator<DSMessage>() {
         @Override
-        public Message createFromParcel(Parcel in) {
-            return new Message(in);
+        public DSMessage createFromParcel(Parcel in) {
+            return new DSMessage(in);
         }
 
         @Override
-        public Message[] newArray(int size) {
-            return new Message[size];
+        public DSMessage[] newArray(int size) {
+            return new DSMessage[size];
         }
     };
 
