@@ -17,8 +17,6 @@ import com.siasun.ds.aidl.DSMessage
 import com.siasun.ds.aidl.IMessageCallback
 import com.siasun.ds.aidl.IMessageService
 import com.siasun.ds.aidl.MessageServiceClient
-import com.siasun.ds.aidl.MessageServiceClient.Companion.SERVICE_CLASS_NAME
-import com.siasun.ds.aidl.MessageServiceClient.Companion.SERVICE_PACKAGE_NAME
 
 class TestActivity : AppCompatActivity() {
 
