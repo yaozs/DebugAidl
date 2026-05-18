@@ -1,26 +1,50 @@
 package com.siasun.ds.aidl;
 
+import static com.siasun.ds.aidl.AidlConstantsKt.DS_AIDL_CONNECT_VERSION;
+import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_CONTENT;
+import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_ID;
+import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_TYPE;
+import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_VERSION;
+
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class DSMessage implements Parcelable {
-    private String info;      // 消息信息（如类型）
-    private String content;   // 消息内容
-    private String extJson;   // 扩展 JSON
+
+    private Bundle data;
 
     public DSMessage() {
+        this.data = new Bundle();
     }
 
-    public DSMessage(String info, String content, String extJson) {
-        this.info = info;
-        this.content = content;
-        this.extJson = extJson;
+    public DSMessage(Bundle data) {
+        this.data = data != null ? data : new Bundle();
     }
 
     protected DSMessage(Parcel in) {
-        info = in.readString();
-        content = in.readString();
-        extJson = in.readString();
+        this.data = in.readBundle(getClass().getClassLoader());
+        if (this.data == null) {
+            this.data = new Bundle();
+        }
+    }
+
+    public Bundle getData() {
+        return data;
+    }
+
+    public void setData(Bundle data) {
+        this.data = data != null ? data : new Bundle();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeBundle(data);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<DSMessage> CREATOR = new Creator<DSMessage>() {
@@ -35,39 +59,42 @@ public class DSMessage implements Parcelable {
         }
     };
 
-    public String getInfo() {
-        return info;
-    }
+    // ==================== Builder ====================
+    public static class Builder {
+        private final Bundle bundle;
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
+        public Builder() {
+            bundle = new Bundle();
+            // 默认加入版本信息
+            bundle.putString(DS_KEY_VERSION, DS_AIDL_CONNECT_VERSION);
+        }
 
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+        public Builder putType(String value) {
+            bundle.putString(DS_KEY_TYPE, value);
+            return this;
+        }
 
-    public String getExtJson() {
-        return extJson;
-    }
+        public Builder putId(String value) {
+            bundle.putString(DS_KEY_ID, value);
+            return this;
+        }
 
-    public void setExtJson(String extJson) {
-        this.extJson = extJson;
-    }
+        public Builder putContent(String value) {
+            bundle.putString(DS_KEY_CONTENT, value);
+            return this;
+        }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+        /**
+         * 修改版本号（如果不调用则保持默认）
+         */
+        public Builder version(String version) {
+            bundle.putString(DS_KEY_VERSION, version);
+            return this;
+        }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(info);
-        dest.writeString(content);
-        dest.writeString(extJson);
+        public DSMessage build() {
+            return new DSMessage(bundle);
+        }
     }
 }
