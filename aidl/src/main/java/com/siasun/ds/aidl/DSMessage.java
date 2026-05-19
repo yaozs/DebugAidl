@@ -3,6 +3,7 @@ package com.siasun.ds.aidl;
 import static com.siasun.ds.aidl.AidlConstantsKt.DS_AIDL_CONNECT_VERSION;
 import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_CONTENT;
 import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_ID;
+import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_SEND_TYPE;
 import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_TYPE;
 import static com.siasun.ds.aidl.AidlConstantsKt.DS_KEY_VERSION;
 
@@ -69,6 +70,10 @@ public class DSMessage implements Parcelable {
             bundle.putString(DS_KEY_VERSION, DS_AIDL_CONNECT_VERSION);
         }
 
+        public Builder putSendType(SendEnum value) {
+            bundle.putInt(DS_KEY_SEND_TYPE, value.getValue());
+            return this;
+        }
 
         public Builder putType(String value) {
             bundle.putString(DS_KEY_TYPE, value);
