@@ -98,7 +98,14 @@ public class DSMessage implements Parcelable {
             return this;
         }
 
-        public DSMessage build() {
+
+        public DSMessage buildClient() {
+            bundle.putInt(DS_KEY_SEND_TYPE, SendEnum.CLIENT.getValue());
+            return new DSMessage(bundle);
+        }
+
+        public DSMessage buildServer() {
+            bundle.putInt(DS_KEY_SEND_TYPE, SendEnum.SERVER.getValue());
             return new DSMessage(bundle);
         }
     }
